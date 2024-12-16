@@ -1,4 +1,8 @@
-How to Play Objective Defend your spaceship from waves of alien invaders! Survive as long as possible and rack up the highest score.
+How to Play 
+
+Objective 
+
+Defend your spaceship from waves of alien invaders! Survive as long as possible and rack up the highest score.
 
 Controls Left Arrow: Move spaceship left
 
