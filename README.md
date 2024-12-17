@@ -4,7 +4,9 @@ Objective
 
 Defend your spaceship from waves of alien invaders! Survive as long as possible and rack up the highest score.
 
-Controls Left Arrow: Move spaceship left
+*Controls*
+
+Left Arrow: Move spaceship left
 
 Right Arrow: Move spaceship right
 
@@ -20,6 +22,6 @@ Level up every 500 points Each enemy that reaches the bottom reduces your health
 
 Colliding with an enemy causes significant damage 
 
-Game Over 
+*Game Over* 
 
 Your game ends when your health reaches zero. 
