@@ -9,7 +9,7 @@ class SpaceInvadersGame
   end
 
   def start
-    puts "Space Invaders - Ruby Edition!"
+    puts "Space Invaders"
     
     loop do
       display_game_state
@@ -45,7 +45,7 @@ class SpaceInvadersGame
   end
 
   def start
-    puts "Space Invaders - Ruby Edition!"
+    puts "Space Invaders"
     
     loop do
       display_game_state
