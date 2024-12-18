@@ -101,13 +101,13 @@
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
 
-        // Touch control variables
+         Touch control variables
         const leftBtn = document.getElementById('leftBtn');
         const rightBtn = document.getElementById('rightBtn');
         const shootBtn = document.getElementById('shootBtn');
         const healthBar = document.getElementById('healthBar');
 
-        // Game state
+         Game state
         const game = {
             player: {
                 x: canvas.width / 2,
@@ -131,7 +131,7 @@
             gameOver: false
         };
 
-        // UI Elements
+         UI Elements
         const levelDisplay = document.getElementById('levelDisplay');
         const scoreDisplay = document.getElementById('scoreDisplay');
         const healthDisplay = document.getElementById('healthDisplay');
@@ -139,16 +139,16 @@
         const finalScoreDisplay = document.getElementById('finalScoreDisplay');
         const restartButton = document.getElementById('restartButton');
 
-        // Prevent default touch behaviors
+         Prevent default touch behaviors
         function preventDefaultTouch(e) {
             e.preventDefault();
         }
         document.body.addEventListener('touchstart', preventDefaultTouch, { passive: false });
         document.body.addEventListener('touchmove', preventDefaultTouch, { passive: false });
 
-        // Touch Controls
+         Touch Controls
         function setupTouchControls() {
-            // Left movement
+             Left movement
             leftBtn.addEventListener('touchstart', () => {
                 game.touchControls.left = true;
             });
@@ -156,7 +156,7 @@
                 game.touchControls.left = false;
             });
 
-            // Right movement
+             Right movement
             rightBtn.addEventListener('touchstart', () => {
                 game.touchControls.right = true;
             });
@@ -164,7 +164,7 @@
                 game.touchControls.right = false;
             });
 
-            // Shooting
+             Shooting
             shootBtn.addEventListener('touchstart', () => {
                 if (!game.gameOver) {
                     game.bullets.push({
@@ -177,14 +177,14 @@
                 }
             });
 
-            // Restart game on touch
+             Restart game on touch
             restartButton.addEventListener('touchstart', (e) => {
                 e.preventDefault();
                 restartGame();
             });
         }
 
-        // Keyboard Controls (keeping for desktop compatibility)
+         Keyboard Controls (keeping for desktop compatibility)
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowLeft') game.touchControls.left = true;
             if (e.key === 'ArrowRight') game.touchControls.right = true;
@@ -207,7 +207,7 @@
             if (e.key === 'ArrowRight') game.touchControls.right = false;
         });
 
-        // Restart game function
+         Restart game function
         function restartGame() {
             game.player = {
                 x: canvas.width / 2,
@@ -227,7 +227,7 @@
             gameOverScreen.classList.add('hidden');
         }
 
-        // Player movement
+         Player movement
         function updatePlayerMovement() {
             if (game.touchControls.left && game.player.x > 0) {
                 game.player.x -= game.player.speed;
@@ -237,9 +237,9 @@
             }
         }
 
-        // Spawn enemies
+         Spawn enemies
         function spawnEnemies() {
-            // Much slower spawn rate and extremely slow speed
+             Much slower spawn rate and extremely slow speed
             if (Math.random() < 0.005 * game.player.level) {
                 game.enemies.push({
                     x: Math.random() * (canvas.width - 30),
@@ -252,17 +252,17 @@
             }
         }
 
-        // Update bullets
+         Update bullets
         function updateBullets() {
             game.bullets.forEach((bullet, bIndex) => {
                 bullet.y -= bullet.speed;
 
-                // Remove bullets off screen
+                 Remove bullets off screen
                 if (bullet.y < 0) {
                     game.bullets.splice(bIndex, 1);
                 }
 
-                // Check bullet-enemy collision
+                 Check bullet-enemy collision
                 game.enemies.forEach((enemy, eIndex) => {
                     if (
                         bullet.x < enemy.x + enemy.width &&
@@ -273,12 +273,12 @@
                         enemy.health -= game.player.damage;
                         game.bullets.splice(bIndex, 1);
 
-                        // Enemy destroyed
+                         Enemy destroyed
                         if (enemy.health <= 0) {
                             game.enemies.splice(eIndex, 1);
                             game.player.score += 50;
                             
-                            // Level up
+                             Level up
                             if (game.player.score % 500 === 0) {
                                 game.player.level++;
                             }
@@ -288,18 +288,18 @@
             });
         }
 
-        // Update enemies
+         Update enemies
         function updateEnemies() {
             game.enemies.forEach((enemy, index) => {
                 enemy.y += enemy.speed;
 
-                // Enemy reaches bottom
+                 Enemy reaches bottom
                 if (enemy.y > canvas.height) {
                     game.enemies.splice(index, 1);
                     game.player.health -= 10;
                 }
 
-                // Enemy hits player
+                 Enemy hits player
                 if (
                     enemy.x < game.player.x + game.player.width &&
                     enemy.x + enemy.width > game.player.x &&
@@ -311,7 +311,7 @@
                 }
             });
 
-            // Game over condition
+             Game over condition
             if (game.player.health <= 0) {
                 game.gameOver = true;
                 finalScoreDisplay.textContent = `Final Score: ${game.player.score}`;
@@ -319,39 +319,39 @@
             }
         }
 
-        // Draw game objects
+         Draw game objects
         function draw() {
-            // Clear canvas
+             Clear canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Draw player
+             Draw player
             ctx.fillStyle = 'blue';
             ctx.fillRect(game.player.x, game.player.y, game.player.width, game.player.height);
 
-            // Draw bullets
+             Draw bullets
             ctx.fillStyle = 'yellow';
             game.bullets.forEach(bullet => {
                 ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
             });
 
-            // Draw enemies
+             Draw enemies
             ctx.fillStyle = 'red';
             game.enemies.forEach(enemy => {
                 ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
             });
         }
 
-        // Update UI
+         Update UI
         function updateUI() {
             levelDisplay.textContent = game.player.level;
             scoreDisplay.textContent = game.player.score;
             healthDisplay.textContent = game.player.health;
             
-            // Update health bar
+             Update health bar
             const healthPercentage = (game.player.health / game.player.maxHealth) * 100;
             healthBar.style.width = `${healthPercentage}%`;
             
-            // Change health bar color based on health
+             Change health bar color based on health
             if (healthPercentage > 50) {
                 healthBar.className = 'bg-green-500 h-4 rounded-full';
             } else if (healthPercentage > 25) {
@@ -361,7 +361,7 @@
             }
         }
 
-        // Game loop
+         Game loop
         function gameLoop() {
             if (!game.gameOver) {
                 updatePlayerMovement();
@@ -374,10 +374,10 @@
             requestAnimationFrame(gameLoop);
         }
 
-        // Initialize touch controls
+         Initialize touch controls
         setupTouchControls();
 
-        // Start the game
+         Start the game
         gameLoop();
     </script>
 </body>
