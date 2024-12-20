@@ -23,7 +23,7 @@ canvas {
 
 #score, #health, #level {
     margin: 5px 0;
-    font-size: 18px;
+    font-size: 28px;
 }
 
 #score {
