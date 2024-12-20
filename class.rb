@@ -41,7 +41,7 @@ class SpaceInvadersGame
     @lasers = []
     @score = 0
     @health = 100
-    @level = 1
+    @level = 2
   end
 
   def start
