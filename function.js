@@ -31,7 +31,7 @@ let playerX = window.innerWidth / 2;
 function gameLoop() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-     Move the player
+     Move the players
     document.addEventListener('keydown', (event) => {
         if (event.key === 'ArrowLeft') {
             playerX = Math.max(playerX - 10, 0);
