@@ -1,4 +1,4 @@
-class SpaceInvadersGame
+class SpaceInvadersGames
   def initialize
     @player_x = 10
     @enemies = []
